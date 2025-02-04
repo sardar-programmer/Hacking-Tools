@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker Terminal</title>
+    <style>
+        body {
+            background-color: black;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .terminal {
+            max-width: 90%;
+            width: 600px;
+            padding: 20px;
+            border: 2px solid #00ff00;
+            background: linear-gradient(145deg, #003300, #001a00);
+            box-shadow: 0px 0px 20px #00ff00;
+            border-radius: 8px;
+            transform: perspective(800px) rotateX(10deg);
+            overflow: hidden;
+        }
+        .message {
+            margin: 10px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            display: block;
+            animation: typing 1s steps(30, end);
+        }
+        .dots {
+            display: inline-block;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal" id="terminal"></div>
+    <script>
+        const messages = [
+            "Initializing hacking",
+            "Reading your files",
+            "Password files detected",
+            "Sending all password and personal files to server",
+            'Shering Your Whatsapp Chat Detial',
+            "Check Your All Bank Accounts And Your Money Trasiction History",
+            "Recieving All Files",
+            "Your Safe Information Is Successful Send",
+            "HAHHAHAA Your Really Confuse But This Is A Simple Prank",
+            "Chill bro I Was Jocking"
+        ];
+        
+        const terminal = document.getElementById("terminal");
+        
+        function showMessage(index) {
+            if (index >= messages.length) return;
+            
+            const msg = document.createElement("div");
+            msg.classList.add("message");
+            msg.textContent = messages[index];
+            terminal.appendChild(msg);
+            
+            if (index < messages.length - 1) {
+                const span = document.createElement("span");
+                span.classList.add("dots");
+                msg.appendChild(span);
+                
+                let dotCount = 0;
+                const dotInterval = setInterval(() => {
+                    span.textContent = ".".repeat(dotCount % 4);
+                    dotCount++;
+                }, 500);
+                
+                setTimeout(() => {
+                    clearInterval(dotInterval);
+                    span.textContent = "";
+                }, Math.random() * 8000 + 1000);
+            }
+            
+            terminal.scrollTop = terminal.scrollHeight;
+            setTimeout(() => showMessage(index + 1), Math.random() * 8000 + 1000);
+        }
+        
+        showMessage(0);
+    </script>
+</body>
+</html>
